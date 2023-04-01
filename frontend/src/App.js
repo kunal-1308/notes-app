@@ -57,58 +57,60 @@ function App() {
 				console.error(error);
 			});
 	};
-	if (notes.length === 0) {
-		return <div>Loading...🔃</div>;
-	}
+
 	return (
 		<div>
 			<CreateNote />
 			<h1>Note List</h1>
-			<table>
-				<tr>
-					<th>ID</th>
-					<th>Title</th>
-					<th>Content</th>
-					<th>Date Created</th>
-					<th>Actions</th>
-				</tr>
+			{notes.length === 0 ? (
+				<div>Loading...🔃</div>
+			) : (
+				<table>
+					<tr>
+						<th>ID</th>
+						<th>Title</th>
+						<th>Content</th>
+						<th>Date Created</th>
+						<th>Actions</th>
+					</tr>
 
-				{notes.map((note, index) => {
-					return (
-						<tr>
-							<td>{index + 1}</td>
-							<td>
-								{editingNote && editingNote._id === note._id ? (
-									<form onSubmit={handleEditNote}>
-										<input
-											type="text"
-											value={editingNote.title}
-											onChange={(event) =>
-												setEditingNote({ ...editingNote, title: event.target.value })
-											}
-										/>
-										<button type="submit">Save</button>
-									</form>
-								) : (
-									<>
-										<>{note.title}</>
-									</>
-								)}
-							</td>
-							<td>{note.content}</td>
-							<td>{note.createdAt.toString().split("T")[0]}</td>
-							<td>
-								<button className="edit" onClick={() => handleEditButtonClick(note)}>
-									Edit
-								</button>
-								<button className="delete" onClick={() => handleDeleteButtonClick(note)}>
-									Delete
-								</button>
-							</td>
-						</tr>
-					);
-				})}
-			</table>
+					{notes.map((note, index) => {
+						return (
+							<tr>
+								<td>{index + 1}</td>
+								<td>
+									{editingNote && editingNote._id === note._id ? (
+										<form onSubmit={handleEditNote}>
+											<input
+												type="text"
+												value={editingNote.title}
+												onChange={(event) =>
+													setEditingNote({ ...editingNote, title: event.target.value })
+												}
+											/>
+											<button type="submit">Save</button>
+										</form>
+									) : (
+										<>
+											<>{note.title}</>
+										</>
+									)}
+								</td>
+								<td>{note.content}</td>
+								<td>{note.createdAt.toString().split("T")[0]}</td>
+								<td>
+									<button className="edit" onClick={() => handleEditButtonClick(note)}>
+										Edit
+									</button>
+									<button className="delete" onClick={() => handleDeleteButtonClick(note)}>
+										Delete
+									</button>
+								</td>
+							</tr>
+						);
+					})}
+				</table>
+			)}
 		</div>
 	);
 }
