@@ -6,7 +6,7 @@ function CreateNote() {
 	const [title, setTitle] = useState("");
 	const [content, setContent] = useState("");
 
-    const handleSubmit = (e) => {
+	const handleSubmit = (e) => {
 		e.preventDefault();
 
 		const newNote = {
@@ -29,19 +29,25 @@ function CreateNote() {
 	return (
 		<div>
 			<h1>Notes</h1>
-			{/* <ul>
-				{notes.map((note) => (
-					<li key={note._id}>{note.title}</li>
-				))}
-			</ul> */}
 			<form onSubmit={handleSubmit}>
-				<input type="text" placeholder="Title" value={title} onChange={(e) => setTitle(e.target.value)} />
-				<input
-					type="text"
-					placeholder="Description"
-					value={content}
-					onChange={(e) => setContent(e.target.value)}
-				/>
+				<>
+					<input
+						type="text"
+						placeholder="Enter Title"
+						value={title}
+						onChange={(e) => setTitle(e.target.value)}
+					/>
+				</>
+				<br></br>
+				<>
+					<input
+						type="text"
+						placeholder="Enter Content"
+						value={content}
+						onChange={(e) => setContent(e.target.value)}
+					/>
+				</>
+				<br></br>
 				<button type="submit">Add</button>
 			</form>
 		</div>

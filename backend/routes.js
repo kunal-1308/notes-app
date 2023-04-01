@@ -70,7 +70,7 @@ router.patch("/:id", getNote, async (req, res) => {
 // DELETE a note
 router.delete("/:id", getNote, async (req, res) => {
 	try {
-		await res.note.remove();
+		await Note.deleteOne(res.note);
 		res.json({ message: "Note deleted" });
 	} catch (err) {
 		res.status(500).json({ message: err.message });
